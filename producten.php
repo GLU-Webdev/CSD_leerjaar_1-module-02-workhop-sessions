@@ -1,5 +1,5 @@
 <?php
-$array = [
+$productenarray = [
     "products" => [
         [
             "id" => "1",

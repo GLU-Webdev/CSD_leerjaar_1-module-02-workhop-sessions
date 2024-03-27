@@ -22,7 +22,7 @@ if (isset($_GET['destroy'])) {
 <body>
     <nav style="display: flex; justify-content: space-between">
         <div class="links">
-            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">pagina 3</a>
+            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">winkelwagen</a>
         </div>
         <div class="destroy"><a href="sessions.php?destroy=1">destroy session</a></div>
     </nav>
@@ -53,26 +53,17 @@ if (isset($_GET['destroy'])) {
         <?php
         if (isset($_SESSION['cart'])) {
 
-            include 'producten.php';
+            include_once 'producten.php';
 
-            foreach(array_keys($_SESSION['cart']) as $productid) {
-                echo 'id: ' . $productid . ' - aantal: ' . $_SESSION['cart'][$productid] . "<br>";
-                
-                foreach ($array['products'] as $product) {
+            foreach (array_keys($_SESSION['cart']) as $productid) {
+                //echo 'id: ' . $productid . ' - aantal: ' . $_SESSION['cart'][$productid] . "<br>";
+
+                foreach ($productenarray['products'] as $product) {
                     if ($product['id'] == $productid) {
-                        //echo $product['id'];
                         ?>
-                        <div class="product">
-                            <a href="detail.php?id=<?= $product['id']; ?>">
-                                <div class="title"><?= $product['title']; ?></div>
-                            </a>
-                            <form action="" method="post">
-                                <input type="hidden" name="id" value="<?= $product['id']; ?>">
-                                <input type="submit" name="bestel" value="bestel">
-                                <input type="number" name="aantal" value="<?= $_SESSION['cart'][$productid]; ?>" min=1>
-                            </form>
-                        </div>
-                    <?php
+                        <div>product id: <?= $product['id'] ?> - title: <?= $product['title'] ?> - aantal : <?= $_SESSION['cart'][$productid] ?></div>
+
+                        <?php
                     }
                 }
             }

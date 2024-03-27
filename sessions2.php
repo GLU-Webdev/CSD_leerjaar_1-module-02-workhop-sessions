@@ -31,7 +31,7 @@ if (isset($_GET['destroy'])) {
 <body>
     <nav style="display: flex; justify-content: space-between">
         <div class="links">
-            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">pagina 3</a>
+            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">winkelwagen</a>
         </div>
         <div class="destroy"><a href="sessions.php?destroy=1">destroy session</a></div>
     </nav>

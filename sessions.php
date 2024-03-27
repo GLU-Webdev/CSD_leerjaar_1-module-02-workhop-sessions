@@ -10,6 +10,7 @@ if (isset($_GET['destroy'])) {
 
 // print_r($_POST);
 if (isset($_POST['bestel'])) {
+    //$_SESSION['cart'][] = $_POST['id'];
     $_SESSION['cart'][$_POST['id']] = $_POST['aantal'];
 }
 
@@ -29,7 +30,7 @@ if (isset($_POST['bestel'])) {
 
     <nav style="display: flex; justify-content: space-between">
         <div class="links">
-            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">pagina 3</a>
+            <a href="sessions.php">home</a> / <a href="sessions2.php">pagina 2</a> / <a href="sessions3.php">winkelwagen</a>
         </div>
         <div class="destroy"><a href="sessions.php?destroy=1">destroy session</a></div>
     </nav>
@@ -49,16 +50,6 @@ if (isset($_POST['bestel'])) {
     </p>
 
 
-    <form action="sessions2.php" method="post">
-
-        <input type="text" name="name">
-
-
-        <input type="submit" value="submit">
-
-    </form>
-
-    <hr>
 
     <h1>Producten</h1>
 
@@ -66,20 +57,21 @@ if (isset($_POST['bestel'])) {
         <?php
         include 'producten.php';
 
-        foreach ($array['products'] as $product) {
+        foreach ($productenarray['products'] as $product) {
             //echo $product['id'];
-        ?>
+            ?>
             <div class="product" style="">
                 <a href="detail.php?id=<?= $product['id']; ?>">
                     <div class="title"><?= $product['title']; ?></div>
                 </a>
+
                 <form action="" method="post">
                     <input type="hidden" name="id" value="<?= $product['id']; ?>">
                     <input type="submit" name="bestel" value="bestel">
                     <input type="number" name="aantal" value="1" min=1>
                 </form>
-            </div>
 
+            </div>
 
         <?php
         }

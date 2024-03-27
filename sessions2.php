@@ -11,9 +11,9 @@ if (isset($_GET['destroy'])) {
 
 
 
-if (isset($_POST['name'])) {
-    $_SESSION['name'] = $_POST['name'];
-}
+// if (isset($_POST['name'])) {
+//     $_SESSION['name'] = $_POST['name'];
+// }
 
 
 

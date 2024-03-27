@@ -7,6 +7,12 @@ if (isset($_GET['destroy'])) {
     header('Location: ' . $_SERVER['PHP_SELF']);
     exit();
 }
+
+// print_r($_POST);
+if (isset($_POST['bestel'])) {
+    $_SESSION['cart'][$_POST['id']] = $_POST['aantal'];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +22,7 @@ if (isset($_GET['destroy'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -29,13 +36,16 @@ if (isset($_GET['destroy'])) {
 
     <h1>home</h1>
     <p>
+    <pre>
         <?php
-        if (isset($_SESSION['name'])) {
-            echo '$_SESSION["name"]: ' . $_SESSION['name'];
+        if (isset($_SESSION['cart'])) {
+            echo "\r\n" . '$_SESSION["cart"]:' . "\r\n";
+            print_r($_SESSION["cart"]);
         } else {
-            echo 'no name';
+            echo 'no cart';
         }
         ?>
+        </pre>
     </p>
 
 
@@ -43,9 +53,41 @@ if (isset($_GET['destroy'])) {
 
         <input type="text" name="name">
 
+
         <input type="submit" value="submit">
 
     </form>
+
+    <hr>
+
+    <h1>Producten</h1>
+
+    <div class="products">
+        <?php
+        include 'producten.php';
+
+        foreach ($array['products'] as $product) {
+            //echo $product['id'];
+        ?>
+            <div class="product" style="">
+                <a href="detail.php?id=<?= $product['id']; ?>">
+                    <div class="title"><?= $product['title']; ?></div>
+                </a>
+                <form action="" method="post">
+                    <input type="hidden" name="id" value="<?= $product['id']; ?>">
+                    <input type="submit" name="bestel" value="bestel">
+                    <input type="number" name="aantal" value="1" min=1>
+                </form>
+            </div>
+
+
+        <?php
+        }
+        ?>
+    </div>
+
+
+
 
 
 </body>

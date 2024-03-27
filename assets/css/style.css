@@ -1,0 +1,15 @@
+.products {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.product {
+     background-color: lightblue;
+     min-height: 200px;
+}
+
+nav {
+    background-color: lightyellow;
+    padding: 10px;
+}

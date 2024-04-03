@@ -12,6 +12,8 @@ if (isset($_GET['destroy'])) {
 if (isset($_POST['bestel'])) {
     //$_SESSION['cart'][] = $_POST['id'];
     $_SESSION['cart'][$_POST['id']] = $_POST['aantal'];
+
+
 }
 
 ?>
@@ -42,8 +44,28 @@ if (isset($_POST['bestel'])) {
         if (isset($_SESSION['cart'])) {
             echo "\r\n" . '$_SESSION["cart"]:' . "\r\n";
             print_r($_SESSION["cart"]);
+
+            echo "<hr>";
+
+            $artikel_ids_in_winkelwagen = array_keys($_SESSION['cart']);
+            echo "\r\n" . '$artikel_ids_in_winkelwagen:' . "\r\n";
+            print_r($artikel_ids_in_winkelwagen);
+
+            echo "<hr>";
+
+            echo "\r\n" . 'Artikelen in winkelwagen:' . "\r\n";
+            include_once 'producten.php';
+            foreach ($productenarray['products'] as $product) {
+                if (in_array($product['id'], $artikel_ids_in_winkelwagen )) {
+                    ?>
+                    <div>Artikel: <?= $product['title']; ?> - Aantal: <?= $_SESSION['cart'][$product['id']]; ?></div>
+                    <?php
+
+                }
+            }
+
         } else {
-            echo 'no cart';
+            echo 'cart is empty';
         }
         ?>
         </pre>
@@ -77,7 +99,6 @@ if (isset($_POST['bestel'])) {
         }
         ?>
     </div>
-
 
 
 
